@@ -1,5 +1,5 @@
-require "active_support/core_ext/integer/time"
-
+require 'active_support/core_ext/integer/time'
+require 'uri'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -50,7 +50,6 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -61,6 +60,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  url_obj = URI.parse(Rails.application.credentials[Rails.env.to_sym][:app_url])
+  config.hosts << url_obj.host
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 end
