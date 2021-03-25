@@ -6,6 +6,8 @@ services:
       - pg-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+    ports:
+      - 5422:5432
 
   redis:
     image: redis

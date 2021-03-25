@@ -18,11 +18,15 @@ ActiveRecord::Schema.define(version: 2021_03_22_212325) do
   create_table "terminals", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.integer "state"
-    t.integer "local_goverment"
-    t.string "manage_name"
+    t.string "state"
+    t.string "local_goverment"
+    t.integer "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["local_goverment"], name: "index_terminals_on_local_goverment"
+    t.index ["manager_id"], name: "index_terminals_on_manager_id"
+    t.index ["state", "local_goverment"], name: "index_terminals_on_state_and_local_goverment"
+    t.index ["state"], name: "index_terminals_on_state"
   end
 
   create_table "users", force: :cascade do |t|

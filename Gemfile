@@ -16,6 +16,7 @@ gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'bcrypt'
 gem 'jwt'
+gem 'paging_cursor'
 gem 'simple_command'
 
 # Use Active Storage variant

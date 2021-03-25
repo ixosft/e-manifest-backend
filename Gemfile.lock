@@ -88,7 +88,8 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
+    mimemagic (0.3.8)
+      nokogiri (~> 1)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -97,6 +98,7 @@ GEM
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    paging_cursor (0.1.0)
     pg (1.2.3)
     pry (0.14.0)
       coderay (~> 1.1)
@@ -166,6 +168,7 @@ DEPENDENCIES
   jsonapi-serializer
   jwt
   listen (~> 3.3)
+  paging_cursor
   pg (~> 1.1)
   pry
   puma (~> 5.0)

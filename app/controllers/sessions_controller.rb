@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   # TODO: admin only route
   def register
     @user = User.create(user_params.create[:attrs])
-    if @user.save
+    if @user.save!
       response = { message: 'User created successfully' }
       render json: response, status: :created
     else
