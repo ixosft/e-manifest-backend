@@ -23,7 +23,7 @@ module V1
     private
 
     def terminal_params
-      @terminal_params ||= params.permit(:name, :address, :state, :local_goverment)
+      @terminal_params ||= params.permit(:name, :address, :state, :local_goverment, :manager_id)
     end
   end
 end
