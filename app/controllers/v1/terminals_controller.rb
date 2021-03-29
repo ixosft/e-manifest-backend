@@ -6,7 +6,8 @@ module V1
       index_params = terminal_params.index
       query = index_params[:query]
       include = index_params[:include]
-      @terminals = Terminal.includes(include).where(query).before(with_cursor).limit(per_page)
+      filter = index_params[:filter]
+      @terminals = Terminal.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::TerminalSerializer.new(@terminals, terminal_options.index(@terminals)).serializable_hash
     end
 

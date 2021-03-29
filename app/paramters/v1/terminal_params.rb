@@ -11,9 +11,9 @@ module V1
     def index
       joins = []
       values = []
-      filter = ''
       include = [:manager]
       columns = ''
+      filter = ::V1::FilterService.new(params).build_query_params || ''
       { query: [], joins: joins, filter: filter, include: include }
     end
 
