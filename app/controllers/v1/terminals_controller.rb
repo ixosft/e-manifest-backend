@@ -5,7 +5,8 @@ module V1
     def index
       index_params = terminal_params.index
       query = index_params[:query]
-      @terminals = Terminal.where(query).before(with_cursor).limit(per_page)
+      include = index_params[:include]
+      @terminals = Terminal.includes(include).where(query).before(with_cursor).limit(per_page)
       render json: V1::TerminalSerializer.new(@terminals, terminal_options.index(@terminals)).serializable_hash
     end
 
@@ -18,6 +19,18 @@ module V1
       else
         render json: @terminal.errors, status: :bad_request
       end
+    end
+
+    def update
+      update_params = terminal_params.update
+      @terminal = Terminal.find(params[:id])
+      @terminal.update!(update_params[:attrs])
+      render json: V1::TerminalSerializer.new(@terminal, terminal_options.update).serializable_hash
+    end
+
+    def destroy
+      Terminal.find(params[:id]).destroy!
+      head :no_content, status: :ok
     end
 
     private

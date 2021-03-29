@@ -12,11 +12,16 @@ module V1
       joins = []
       values = []
       filter = ''
+      include = [:manager]
       columns = ''
-      { query: [], joins: joins, filter: filter }
+      { query: [], joins: joins, filter: filter, include: include }
     end
 
     def create
+      { attrs: terminal_params }
+    end
+
+    def update
       { attrs: terminal_params }
     end
 
