@@ -21,7 +21,7 @@ class AuthenticateUser
   private
 
   def user
-    user = User.find_by_username(username)
+    user = User.active.find_by_username(username)
     return user if user && user.authenticate(password)
 
     errors.add :user_authentication, 'Invalid credentials'

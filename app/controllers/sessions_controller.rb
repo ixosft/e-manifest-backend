@@ -4,10 +4,11 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_request, only: %i[login logout register]
   # TODO: admin only route
   def register
+    raise ExceptionHandler::AuthenticationError if params[:role].to_s == '4' # can't create user with super admin role
+
     @user = User.create(user_params.create[:attrs])
     if @user.save!
-      response = { message: 'User created successfully' }
-      render json: response, status: :created
+      render json: register_response, status: :created
     else
       render json: @user.errors, status: :bad_request
     end
@@ -34,6 +35,10 @@ class SessionsController < ApplicationController
 
   def user_options
     @user_options ||= V1::UserOptions.new(params)
+  end
+
+  def register_response
+    params[:type] == 'for_auth' ? { message: 'User created successfully' } : V1::UserSerializer.new(@user, user_options.register).serializable_hash
   end
 
   def authenticate(username, password)

@@ -5,14 +5,23 @@ module V1
     attr_reader :params
 
     DEFAULT = {
-      include: %I[],
+      include: %I[terminal],
       fields: {
-        user: %I[id name username]
+        terminal: %i[id name],
+        user: %I[id name email username role number terminal_id active]
       }
     }.freeze
 
     def initialize(params)
       @params = params
+    end
+
+    def update
+      DEFAULT
+    end
+
+    def register
+      DEFAULT
     end
 
     def index(users)
@@ -22,10 +31,10 @@ module V1
           fields: {
             user: %I[id name]
           },
-          meta: { cursor: users.cursor_before } 
+          meta: { cursor: users.cursor_before }
         }
       else
-        DEFAULT
+        DEFAULT.merge({ meta: { cursor: users.cursor_before } })
       end
     end
 

@@ -11,10 +11,17 @@ module V1
     def index
       joins = []
       values = []
-      include = [:manager]
+      include = []
       columns = ''
+      if params[:type] == 'for_dropdown'
+        columns += " terminals.name ILIKE ('%' || ? || '%') "
+        values += [params[:query]]
+      else
+        include << :manager
+      end
       filter = ::V1::FilterService.new(params).build_query_params || ''
-      { query: [], joins: joins, filter: filter, include: include }
+      query =  columns.present? ? [columns, *values] : []
+      { query: query, joins: joins, filter: filter, include: include }
     end
 
     def create

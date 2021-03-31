@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   end
 
   namespace :v1 do
-    resources :users
+    resources :users, only: %i[index update] do
+      get :validate_username, on: :collection
+    end
+
     resources :terminals
   end
 end
