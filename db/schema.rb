@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_095214) do
+ActiveRecord::Schema.define(version: 2021_04_02_125501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "number"
+    t.string "manager_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_companies_on_name"
+  end
 
   create_table "terminals", force: :cascade do |t|
     t.string "name"
@@ -36,12 +46,14 @@ ActiveRecord::Schema.define(version: 2021_03_31_095214) do
     t.string "password_digest"
     t.integer "role", default: 1
     t.string "number"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "terminal_id"
-    t.boolean "active", default: true
     t.index ["active"], name: "index_users_on_active"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["name", "username"], name: "index_users_on_name_and_username"
+    t.index ["name"], name: "index_users_on_name"
     t.index ["terminal_id"], name: "index_users_on_terminal_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end

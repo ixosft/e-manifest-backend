@@ -27,8 +27,9 @@ module V1
         values += [params[:query], params[:query]]
       end
 
-      filter = ::V1::FilterService.new(params).build_query_params || ''
+      filter_values, filter = ::V1::FilterService.new(params).build_query_params
       query =  columns.present? ? [columns, *values] : []
+      filter = filter.strip.present? ? [filter, *filter_values] : []
       { query: query, joins: joins, filter: filter, include: include }
     end
 

@@ -3,17 +3,23 @@ module V1
     attr_reader :params, :filter
     def initialize(params)
       @params = params
-      @filter = params[:filter]
+      @filter = params[:filter] || {}
     end
 
     def build_query_params
-      return if filter.nil? ||  (params[:filter].present? &&filter[:columns].nil?) ||  (params[:filter].present? &&filter[:columns].nil?)
+      if !filter[:query].present? || filter.nil? || (params[:filter].present? && filter[:columns].nil?) || (params[:filter].present? && filter[:columns].nil?)
+        return [[], '']
+      end
 
       columns = ''
       query = filter[:query]
       table = filter[:table]
-      filter[:columns].each_with_index { |column, i| columns += " #{i > 0 ? ' OR ' : ' '}  #{table}.#{column} ILIKE ('%' || '#{query}' || '%')  " }
-      columns
+      values = []
+      filter[:columns].each_with_index do |column, i|
+        columns += " #{i.positive? ? ' OR ' : ' '}  #{table}.#{column} ILIKE ('%' || ? || '%')  "
+        values << query
+      end
+      [values, columns]
     end
   end
 end

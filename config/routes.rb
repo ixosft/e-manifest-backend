@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     end
 
     resources :terminals
+    resources :companies
   end
 end

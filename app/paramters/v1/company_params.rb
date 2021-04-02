@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 module V1
-  class TerminalParams
+  class CompanyParams
     attr_reader :params
 
     def initialize(params)
@@ -13,12 +11,6 @@ module V1
       values = []
       include = []
       columns = ''
-      if params[:type] == 'for_dropdown'
-        columns += " terminals.name ILIKE ('%' || ? || '%') "
-        values += [params[:query]]
-      else
-        include << :manager
-      end
       filter_values, filter = ::V1::FilterService.new(params).build_query_params
       filter = filter.strip.present? ? [filter, *filter_values] : []
       query =  columns.present? ? [columns, *values] : []
@@ -26,17 +18,17 @@ module V1
     end
 
     def create
-      { attrs: terminal_params }
+      { attrs: company_params }
     end
 
     def update
-      { attrs: terminal_params }
+      { attrs: company_params }
     end
 
     private
 
-    def terminal_params
-      @terminal_params ||= params.permit(:name, :address, :state, :local_goverment, :manager_id)
+    def company_params
+      @company_params ||= params.permit(:name, :address, :manager_name, :number)
     end
   end
 end
