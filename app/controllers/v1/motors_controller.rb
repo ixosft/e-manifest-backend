@@ -36,7 +36,7 @@ module V1
 
     def validate_plate_number
       validate_number_plate_params = motor_params.validate_number_plate
-      render json: { valid: !User.exists?(validate_number_plate_params[:query]) }
+      render json: { valid: !Motor.exists?(validate_number_plate_params[:query]) }
     end
 
     private
