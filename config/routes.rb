@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :validate_username, on: :collection
     end
 
-    resources :motor do
+    resources :motors do
       get :validate_plate_number, on: :collection
     end
     resources :people
