@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_125501) do
+ActiveRecord::Schema.define(version: 2021_04_02_222452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,41 @@ ActiveRecord::Schema.define(version: 2021_04_02_125501) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_companies_on_name"
+  end
+
+  create_table "motors", force: :cascade do |t|
+    t.string "model"
+    t.integer "brand"
+    t.string "color"
+    t.integer "year"
+    t.string "chasis_number"
+    t.string "number_plate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "people_id"
+    t.index ["brand", "model"], name: "index_motors_on_brand_and_model"
+    t.index ["brand"], name: "index_motors_on_brand"
+    t.index ["chasis_number"], name: "index_motors_on_chasis_number"
+    t.index ["model"], name: "index_motors_on_model"
+    t.index ["people_id"], name: "index_motors_on_people_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "full_name"
+    t.string "number"
+    t.integer "person_type", default: 1
+    t.string "next_of_kin_name"
+    t.string "next_of_kin_number"
+    t.string "next_of_kin_address"
+    t.string "next_of_kin_relationship"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["full_name"], name: "index_people_on_full_name"
+    t.index ["number"], name: "index_people_on_number"
+    t.index ["person_type", "full_name"], name: "index_people_on_person_type_and_full_name"
+    t.index ["person_type", "number", "full_name"], name: "index_people_on_person_type_and_number_and_full_name"
+    t.index ["person_type", "number"], name: "index_people_on_person_type_and_number"
+    t.index ["person_type"], name: "index_people_on_person_type"
   end
 
   create_table "terminals", force: :cascade do |t|

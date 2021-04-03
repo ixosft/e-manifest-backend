@@ -1,10 +1,10 @@
 module V1
-  class CompanyOptions
+  class MotorOptions
     attr_reader :params
     DEFAULT = {
       include: %I[],
       fields: {
-        company: V1::CompanySerializer::ATTRIBUTES
+        company: V1::MotorSerializer::ATTRIBUTES
       }
     }.freeze
 
@@ -17,7 +17,7 @@ module V1
         {
           include: [],
           fields: {
-            company: %i[id name]
+            terminal: %i[id number_plate]
           }
         }
       else

@@ -1,10 +1,10 @@
 module V1
-  class CompanyOptions
+  class PersonOptions
     attr_reader :params
     DEFAULT = {
       include: %I[],
       fields: {
-        company: V1::CompanySerializer::ATTRIBUTES
+        company: V1::PersonSerializer::ATTRIBUTES
       }
     }.freeze
 
@@ -12,16 +12,16 @@ module V1
       @params = params
     end
 
-    def index(companies)
+    def index(people)
       if params[:type] == 'for_dropdown'
         {
           include: [],
           fields: {
-            company: %i[id name]
+            person: %i[id name]
           }
         }
       else
-        DEFAULT.merge({ meta: { cursor: companies.cursor_before } })
+        DEFAULT.merge({ meta: { cursor: people.cursor_before } })
       end
     end
 

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       get :validate_username, on: :collection
     end
 
+    resources :motor do
+      get :validate_plate_number, on: :collection
+    end
+    resources :people
     resources :terminals
     resources :companies
   end
