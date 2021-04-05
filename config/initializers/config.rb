@@ -11,7 +11,7 @@ CAR_BRANDS = [{
 }, {
   "name": 'AD_TRAMONTANA'
 }, {
-  "name": 'ALFA ROMEO'
+  "name": 'ALFA_ROMEO'
 }, {
   "name": 'ALMAC'
 }, {
@@ -53,7 +53,7 @@ CAR_BRANDS = [{
 }, {
   "name": 'BRISTOL'
 }, {
-  "name": 'BRITISH LEYLAND'
+  "name": 'BRITISH_LEYLAND'
 }, {
   "name": 'BRM_BUGGY'
 }, {
@@ -103,7 +103,7 @@ CAR_BRANDS = [{
 }, {
   "name": 'DATSUN'
 }, {
-  "name": 'DE LA CHAPELLE'
+  "name": 'DE_LA_CHAPELLE'
 }, {
   "name": 'DMC'
 }, {
@@ -143,7 +143,7 @@ CAR_BRANDS = [{
 }, {
   "name": 'EXAGON'
 }, {
-  "name": 'FARALLI & MAZZANTI'
+  "name": 'FARALLI_MAZZANTI'
 }, {
   "name": 'FAW'
 }, {
@@ -219,7 +219,7 @@ CAR_BRANDS = [{
 }, {
   "name": 'IFR'
 }, {
-  "name": 'IRAN KHODRO'
+  "name": 'IRAN_KHODRO'
 }, {
   "name": 'IKCO'
 }, {
@@ -455,13 +455,13 @@ CAR_BRANDS = [{
 }, {
   "name": 'TAURO'
 }, {
-  "name": 'TAWON CAR'
+  "name": 'TAWON_CAR'
 }, {
-  "name": 'TD CARS'
+  "name": 'TD_CARS'
 }, {
   "name": 'TESLA'
 }, {
-  "name": 'THAI RUNG'
+  "name": 'THAI_RUNG'
 }, {
   "name": 'TOYOTA'
 }, {
@@ -1501,4 +1501,4 @@ STATE_LGTS = [
 ].freeze
 
 BRANDS = CAR_BRANDS.each_with_object({}).with_index { |(brand, brand_hash), i| brand_hash[brand[:name].to_sym] = i + 1 }
-YEARS = (1990..2030).each_with_object({}).with_index { |(year, year_hash), i| year_hash[year.to_s.to_sym] =  i + 1  }
+YEARS = (1990..2030).each_with_object({}).with_index { |(year, year_hash), i| year_hash[year.to_s.to_sym] = i + 1 }

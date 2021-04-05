@@ -2,6 +2,7 @@ class Terminal < ApplicationRecord
   include Utility::Object
   has_many :users
   belongs_to :manager, class_name: :User, foreign_key: :manager_id, optional: true
+  validates_presence_of :state, :local_goverment
   validate :validate_state_lgts
 
   def validate_state_lgts

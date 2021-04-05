@@ -11,6 +11,16 @@ module V1
       values = []
       include = []
       columns = ''
+      if params[:type] == 'for_driver_dropdown'
+        columns += ' people.person_type = ? '
+        values << Person.person_types[:driver]
+      end
+
+      if params[:query].present? && params[:query].strip.presence
+        columns += " #{columns.present? ? ' AND ' : ' '} people.full_name ILIKE ('%' || ? || '%') "
+        values += [params[:query].strip.presence]
+      end
+
       filter_values, filter = ::V1::FilterService.new(params).build_query_params
       filter = filter.strip.present? ? [filter, *filter_values] : []
       query =  columns.present? ? [columns, *values] : []

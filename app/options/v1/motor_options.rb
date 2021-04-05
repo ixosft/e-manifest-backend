@@ -2,9 +2,10 @@ module V1
   class MotorOptions
     attr_reader :params
     DEFAULT = {
-      include: %I[],
+      include: %I[onwer],
       fields: {
-        company: V1::MotorSerializer::ATTRIBUTES
+        onwer: %i[id full_name],
+        motor: V1::MotorSerializer::ATTRIBUTES
       }
     }.freeze
 
@@ -12,16 +13,16 @@ module V1
       @params = params
     end
 
-    def index(companies)
+    def index(motors)
       if params[:type] == 'for_dropdown'
         {
           include: [],
           fields: {
-            terminal: %i[id number_plate]
+            motor: %i[id number_plate]
           }
         }
       else
-        DEFAULT.merge({ meta: { cursor: companies.cursor_before } })
+        DEFAULT.merge({ meta: { cursor: motors.cursor_before } })
       end
     end
 

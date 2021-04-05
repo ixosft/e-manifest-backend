@@ -11,10 +11,11 @@ class CreateMotors < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_reference :motors, :people, index: true
+    add_reference :motors, :person, index: true
     add_index :motors, %I[model]
     add_index :motors, %I[brand]
     add_index :motors, %I[chasis_number]
     add_index :motors, %I[brand model]
+    add_index :motors, %I[person_id brand]
   end
 end

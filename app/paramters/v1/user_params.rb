@@ -23,7 +23,7 @@ module V1
       end
 
       if params[:query].present? && params[:query].strip.presence
-        columns += " AND (users.name ILIKE ('%' || ? || '%') OR users.username ILIKE ('%' || ? || '%')) "
+        columns += "  #{columns.present? ? ' AND ' : ' '} (users.name ILIKE ('%' || ? || '%') OR users.username ILIKE ('%' || ? || '%')) "
         values += [params[:query], params[:query]]
       end
 

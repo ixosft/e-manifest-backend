@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :validate_plate_number, on: :collection
     end
     resources :people
+    resources :manifests
     resources :terminals
     resources :companies
   end

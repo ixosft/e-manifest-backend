@@ -4,4 +4,5 @@ class Motor < ApplicationRecord
 
   enum brand: BRANDS
   enum year: YEARS
+  belongs_to :onwer, class_name: :Person, foreign_key: :person_id, optional: true
 end

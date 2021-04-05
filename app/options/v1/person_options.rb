@@ -17,7 +17,7 @@ module V1
         {
           include: [],
           fields: {
-            person: %i[id name]
+            person: %i[id full_name person_type]
           }
         }
       else
