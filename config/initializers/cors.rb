@@ -20,7 +20,8 @@ cors_headers_internal = default_cors_headers.merge(
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins [Rails.application.credentials[Rails.env.to_sym].dig(:app_url)]
+    origins [Rails.application.credentials[:development].dig(:app_url), Rails.application.credentials[:production].dig(:app_url)]
+    # origins [Rails.application.credentials[Rails.env.to_sym].dig(:app_url)]
     resource '*', cors_headers_internal
   end
 
