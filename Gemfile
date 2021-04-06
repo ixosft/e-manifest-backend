@@ -15,6 +15,7 @@ gem 'puma', '~> 5.0'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt'
+gem 'discard'
 gem 'jwt'
 gem 'paging_cursor'
 gem 'simple_command'

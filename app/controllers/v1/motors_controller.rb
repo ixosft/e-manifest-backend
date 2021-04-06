@@ -30,7 +30,7 @@ module V1
     end
 
     def destroy
-      Motor.find(params[:id]).destroy!
+      Motor.find(params[:id]).discard
       head :no_content, status: :ok
     end
 

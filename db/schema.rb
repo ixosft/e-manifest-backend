@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_104329) do
+ActiveRecord::Schema.define(version: 2021_04_06_140935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.string "manager_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_companies_on_deleted_at"
     t.index ["name"], name: "index_companies_on_name"
   end
 
@@ -49,10 +51,12 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.bigint "motor_id"
     t.bigint "company_id"
     t.bigint "terminal_id"
+    t.datetime "deleted_at"
     t.index ["company_id", "motor_id"], name: "index_manifests_on_company_id_and_motor_id"
     t.index ["company_id", "terminal_id", "motor_id"], name: "index_manifests_on_company_id_and_terminal_id_and_motor_id"
     t.index ["company_id", "terminal_id"], name: "index_manifests_on_company_id_and_terminal_id"
     t.index ["company_id"], name: "index_manifests_on_company_id"
+    t.index ["deleted_at"], name: "index_manifests_on_deleted_at"
     t.index ["destination_state"], name: "index_manifests_on_destination_state"
     t.index ["motor_id"], name: "index_manifests_on_motor_id"
     t.index ["source_state", "destination_state"], name: "index_manifests_on_source_state_and_destination_state"
@@ -70,9 +74,11 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "person_id"
+    t.datetime "deleted_at"
     t.index ["brand", "model"], name: "index_motors_on_brand_and_model"
     t.index ["brand"], name: "index_motors_on_brand"
     t.index ["chasis_number"], name: "index_motors_on_chasis_number"
+    t.index ["deleted_at"], name: "index_motors_on_deleted_at"
     t.index ["model"], name: "index_motors_on_model"
     t.index ["person_id", "brand"], name: "index_motors_on_person_id_and_brand"
     t.index ["person_id"], name: "index_motors_on_person_id"
@@ -88,6 +94,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.string "next_of_kin_relationship"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_people_on_deleted_at"
     t.index ["full_name"], name: "index_people_on_full_name"
     t.index ["number"], name: "index_people_on_number"
     t.index ["person_type", "full_name"], name: "index_people_on_person_type_and_full_name"
@@ -104,6 +112,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.integer "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_terminals_on_deleted_at"
     t.index ["local_goverment"], name: "index_terminals_on_local_goverment"
     t.index ["manager_id"], name: "index_terminals_on_manager_id"
     t.index ["state", "local_goverment"], name: "index_terminals_on_state_and_local_goverment"
@@ -121,7 +131,9 @@ ActiveRecord::Schema.define(version: 2021_04_03_104329) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "terminal_id"
+    t.datetime "deleted_at"
     t.index ["active"], name: "index_users_on_active"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email"
     t.index ["name", "username"], name: "index_users_on_name_and_username"
     t.index ["name"], name: "index_users_on_name"

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       get :validate_username, on: :collection
     end
 
+    namespace :reports do
+      resources :manifests
+    end
+
     resources :motors, only: %i[index destroy create update] do
       get :validate_plate_number, on: :collection
     end

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include SoftDeletable
   belongs_to :terminal, optional: true
 
   validates_presence_of :username, :email, :password_digest

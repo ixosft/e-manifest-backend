@@ -28,7 +28,7 @@ module V1
     end
 
     def destroy
-      Company.find(params[:id]).destroy!
+      Company.find(params[:id]).discard
       head :no_content, status: :ok
     end
 
