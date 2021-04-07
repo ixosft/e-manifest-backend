@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ::ActionController::Cookies
   include ExceptionHandler
 
   before_action :authenticate_request
