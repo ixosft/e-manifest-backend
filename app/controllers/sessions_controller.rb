@@ -48,7 +48,16 @@ class SessionsController < ApplicationController
 
       # Another option to address this issue is to give your encoded JWTs a short expiration date, re-issue them and re-set the cookie with each valid request.
       result = command.result
-      cookies.signed[:jwt] = { value: result[:token], httponly: true, expires: 24.hour.from_now }
+      response.set_cookie(
+        :jwt,
+        {
+          path: '/',
+          httponly: true,
+          value: result[:token],
+          expires: 24.hour.from_now,
+          secure: Rails.env.production?
+        }.merge!(Rails.env.production? ? { same_site: 'None' } : {})
+      )
       render json: V1::UserSerializer.new(result[:user], user_options.auth).serializable_hash
     else
       render json: { error: command.errors }, status: :bad_request
