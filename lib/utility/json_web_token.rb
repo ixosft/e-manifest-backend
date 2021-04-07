@@ -3,6 +3,7 @@ module Utility
     # TODO: move to secret and generate unique AUD
     ISS = 'e-manifest.com'.freeze
     AUD = '238d4793-70de-4183-9707-48ed8ecd19d9'.freeze
+    SECRET = Rails.application.credentials[Rails.env.to_sym].dig(:secret_key_base)
 
     class << self
       def encode(payload, exp = 48.hours.from_now)
@@ -11,14 +12,14 @@ module Utility
         payload[:aud] = AUD
         payload[:iss] = ISS
         # this encodes the user data(payload) with our secret key
-        JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
+        JWT.encode(payload, SECRET, 'HS256')
       end
 
       def decode(token)
         # decodes the token to get user data (payload)
         body = JWT.decode(
           token,
-          Rails.application.secrets.secret_key_base,
+          SECRET,
           true,
           { verify_iss: true, iss: ISS, verify_aud: true, aud: AUD, algorithm: 'HS256' }
         )[0]
