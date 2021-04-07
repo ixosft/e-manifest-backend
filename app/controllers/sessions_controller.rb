@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    cookies.delete(:jwt)
+    response.set_cookie('jwt', { path: '/', value: '', expires: Time.at(0) })
     head :no_content, status: :ok
   end
 
