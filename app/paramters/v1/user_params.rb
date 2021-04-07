@@ -55,7 +55,7 @@ module V1
 
     def user_params
       @user_params ||= params.permit(
-        :name, :username, :terminal_id, :number, :email, :password, :active
+        :name, :username, :terminal_id, :number, :email, :password, :active, :role
       )
     end
   end

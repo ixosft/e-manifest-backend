@@ -48,6 +48,7 @@ class SessionsController < ApplicationController
 
       # Another option to address this issue is to give your encoded JWTs a short expiration date, re-issue them and re-set the cookie with each valid request.
       # https://breakdev.org/sniping-insecure-cookies-with-xss/
+      # https://www.skcript.com/svr/samesite-issue-with-rails-in-chrome/
       result = command.result
       response.set_cookie(
         :jwt,
