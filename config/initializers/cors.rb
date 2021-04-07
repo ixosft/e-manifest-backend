@@ -7,13 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins [Rails.application.credentials[:development].dig(:app_url), Rails.application.credentials[:production].dig(:app_url)]
-    # origins [Rails.application.credentials[Rails.env.to_sym].dig(:app_url)]
+    origins [Rails.application.credentials[Rails.env.to_sym].dig(:app_url)]
     resource '*', headers: :any, credentials: true, expose: %i[jwt], methods: %i[get post put patch delete options head]
   end
-
-  # allow do
-  #   origins '*'
-  #   resource '*', default_cors_headers
-  # end
 end

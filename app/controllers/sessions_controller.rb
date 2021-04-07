@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
       # TODO: In order to keep the session active then, we need to reset this cookie, with a new expiration, every time we receive an authenticated requests.
 
       # Another option to address this issue is to give your encoded JWTs a short expiration date, re-issue them and re-set the cookie with each valid request.
+      # https://breakdev.org/sniping-insecure-cookies-with-xss/
       result = command.result
       response.set_cookie(
         :jwt,
