@@ -5,24 +5,11 @@
 
 # Read more: https://github.com/cyu/rack-cors, https://blog.jverkamp.com/2020/01/16/rackcors-configuration-tricks/
 
-# These are the Rack::Cors settings that we want to set, first for all domains and then for trusted ones
-default_cors_headers = {
-  headers: :any,
-  credentials: false,
-  methods: %i[get post options head]
-}
-
-cors_headers_internal = default_cors_headers.merge(
-  credentials: true,
-  expose: %i[access-token expiry token-type uid client],
-  methods: %i[get post put patch delete options head]
-)
-
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins [Rails.application.credentials[:development].dig(:app_url), Rails.application.credentials[:production].dig(:app_url)]
     # origins [Rails.application.credentials[Rails.env.to_sym].dig(:app_url)]
-    resource '*', cors_headers_internal
+    resource '*', headers: :any, credentials: true, expose: %i[jwt], methods: %i[get post put patch delete options head]
   end
 
   # allow do
