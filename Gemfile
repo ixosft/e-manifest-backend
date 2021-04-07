@@ -18,6 +18,7 @@ gem 'bcrypt'
 gem 'discard'
 gem 'jwt'
 gem 'paging_cursor'
+gem 'rails_same_site_cookie', '~> 0.1.8'
 gem 'simple_command'
 
 # Use Active Storage variant
