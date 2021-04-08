@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     # cookies.delete(:jwt, domain: :all)
     response.set_cookie(
       :jwt,
-      { path: '/', value: '', expires: Time.at(0) }.merge!(
+      { path: '/', value: '', httponly: true, secure: Rails.env.production?, expires: Time.at(0) }.merge!(
         Rails.env.production? ? { same_site: 'None' } : {}
       )
     )
