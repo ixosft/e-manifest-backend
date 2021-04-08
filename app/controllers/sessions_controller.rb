@@ -19,8 +19,13 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    cookies.delete(:jwt, domain: :all)
-    # response.set_cookie('jwt', { path: '/', value: '', expires: Time.at(0) })
+    # cookies.delete(:jwt, domain: :all)
+    response.set_cookie(
+      :jwt,
+      { path: '/', value: '', expires: Time.at(0) }.merge!(
+        Rails.env.production? ? { same_site: 'None' } : {}
+      )
+    )
     head :no_content, status: :ok
   end
 
