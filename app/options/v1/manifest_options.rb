@@ -6,7 +6,7 @@ module V1
       fields: {
         company: %i[id name],
         motor: %i[id chasis_number number_plate brand],
-        person: %i[id full_name person_type],
+        person: V1::PersonSerializer::ATTRIBUTES,
         terminal: %i[name id state local_goverment],
         manifest_person: %i[id person_id manifest_id destination_state destination_local_goverment],
         manifest: V1::ManifestSerializer::ATTRIBUTES
@@ -22,6 +22,10 @@ module V1
     end
 
     def update
+      DEFAULT
+    end
+
+    def show
       DEFAULT
     end
 

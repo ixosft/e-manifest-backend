@@ -11,6 +11,11 @@ module V1
       render json: V1::ManifestSerializer.new(@manifests, manifest_options.index(@manifests)).serializable_hash
     end
 
+    def show
+      @manifest = Manifest.find(params[:id])
+      render json: V1::ManifestSerializer.new(@manifest, manifest_options.show).serializable_hash
+    end
+
     def create
       create_params = manifest_params.create
       @manifest = Manifest.new(create_params[:attrs])
