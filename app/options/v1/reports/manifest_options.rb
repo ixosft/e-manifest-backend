@@ -4,7 +4,7 @@ module V1
       attr_reader :params
       DEFAULT = {
         fields: {
-          manifest_person: V1::ManifestPeopleSerializer::ATTRIBUTES
+          manifest_person: V1::ManifestPersonSerializer::ATTRIBUTES
         }
       }.freeze
 
