@@ -7,7 +7,8 @@ module V1
       query = index_params[:query]
       include = index_params[:include]
       filter = index_params[:filter]
-      @motors = Motor.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
+      joins = index_params[:joins]
+      @motors = Motor.joins(joins).includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::MotorSerializer.new(@motors, motor_options.index(@motors)).serializable_hash
     end
 

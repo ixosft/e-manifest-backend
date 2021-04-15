@@ -5,7 +5,8 @@ module V1
       query = index_params[:query]
       include = index_params[:include]
       filter = index_params[:filter]
-      @people = Person.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
+      joins = index_params[:joins]
+      @people = Person.joins(joins).includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::PersonSerializer.new(@people, person_options.index(@people)).serializable_hash
     end
 

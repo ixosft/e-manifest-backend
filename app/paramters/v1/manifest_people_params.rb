@@ -7,14 +7,13 @@ module V1
     end
 
     def index
-      joins = []
       values = []
       include = { person: [], manifest: %i[motor terminal company] }
       columns = ''
-      filter_values, filter = ::V1::FilterService.new(params).build_query_params
+      filter_values, filter, filter_joins = ::V1::FilterService.new(ManifestPerson, params).build_query_params
       filter = filter.strip.present? ? [filter, *filter_values] : []
       query =  columns.present? ? [columns, *values] : []
-      { query: query, joins: joins, filter: filter, include: include }
+      { query: query, joins: filter_joins, filter: filter, include: include }
     end
   end
 end

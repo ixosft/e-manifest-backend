@@ -6,7 +6,7 @@ module V1
       def index
         index_params = manifest_params.index
         query = index_params[:query]
-        @manifests = ::Manifest.find_by_sql(query)
+        @manifests = ::ManifestPerson.find_by_sql(query)
         render json: V1::ManifestPersonSerializer.new(@manifests, manifest_options.index(@manifests)).serializable_hash
       end
 

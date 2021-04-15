@@ -1,7 +1,7 @@
 class Manifest < ApplicationRecord
-  include SoftDeletable
+  # include SoftDeletable
   belongs_to :motor
-  belongs_to :terminal
+  belongs_to :terminal, optional: true
   belongs_to :company
   has_many :manifest_people, dependent: :destroy
   has_many :people, through: :manifest_people

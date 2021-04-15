@@ -7,7 +7,8 @@ module V1
       query = index_params[:query]
       include = index_params[:include]
       filter = index_params[:filter]
-      @manifests = Manifest.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
+      joins = index_params[:joins]
+      @manifests = Manifest.joins(joins).includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::ManifestSerializer.new(@manifests, manifest_options.index(@manifests)).serializable_hash
     end
 

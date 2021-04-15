@@ -9,7 +9,6 @@ module V1
     end
 
     def index
-      joins = []
       values = []
       include = []
       columns = ''
@@ -19,10 +18,10 @@ module V1
       else
         include << :manager
       end
-      filter_values, filter = ::V1::FilterService.new(params).build_query_params
+      filter_values, filter, filter_joins = ::V1::FilterService.new(Terminal, params).build_query_params
       filter = filter.strip.present? ? [filter, *filter_values] : []
       query =  columns.present? ? [columns, *values] : []
-      { query: query, joins: joins, filter: filter, include: include }
+      { query: query, joins: filter_joins, filter: filter, include: include }
     end
 
     def create

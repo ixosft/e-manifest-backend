@@ -5,7 +5,8 @@ module V1
       query = index_params[:query]
       filter = index_params[:filter]
       include = index_params[:include]
-      @manifest_people = ManifestPerson.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
+      joins = index_params[:joins]
+      @manifest_people = ManifestPerson.joins(joins).includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::ManifestPersonSerializer.new(@manifest_people, manifest_people_options.index(@manifest_people)).serializable_hash
     end
 

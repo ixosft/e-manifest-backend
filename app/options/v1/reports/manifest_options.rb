@@ -4,7 +4,15 @@ module V1
       attr_reader :params
       DEFAULT = {
         fields: {
-          manifest_person: V1::ManifestPersonSerializer::ATTRIBUTES
+          manifest_person: %i[id
+                              total_trip_to
+                              people_count
+                              total_motors
+                              total_terminal
+                              total_people
+                              total_companies
+                              destination_state
+                              total_users]
         }
       }.freeze
 

@@ -5,7 +5,8 @@ module V1
       query = index_params[:query]
       include = index_params[:include]
       filter = index_params[:filter]
-      @companies = Company.includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
+      joins = index_params[:joins]
+      @companies = Company.joins(joins).includes(include).where(query).where(filter).before(with_cursor).limit(per_page)
       render json: V1::CompanySerializer.new(@companies, company_options.index(@companies)).serializable_hash
     end
 
