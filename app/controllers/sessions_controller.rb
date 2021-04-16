@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
           value: result[:token],
           expires: 24.hour.from_now,
           secure: Rails.env.production?
-        }.merge!(Rails.env.production? ? { same_site: 'None', domain: ['e-manifest.netlify.app'] } : {})
+        }.merge!(Rails.env.production? ? { same_site: 'None', domain: ['.netlify.app', '.herokuapp.com'] } : {})
       )
       render json: V1::UserSerializer.new(result[:user], user_options.auth).serializable_hash
     else
