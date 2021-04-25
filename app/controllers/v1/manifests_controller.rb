@@ -13,7 +13,9 @@ module V1
     end
 
     def show
-      @manifest = Manifest.find(params[:id])
+      index_params = manifest_params.index
+      include = index_params[:include]
+      @manifest = Manifest.includes(include).find(params[:id])
       render json: V1::ManifestSerializer.new(@manifest, manifest_options.show).serializable_hash
     end
 
@@ -28,8 +30,10 @@ module V1
     end
 
     def update
+      index_params = manifest_params.index
       update_params = manifest_params.update
-      @manifest = Manifest.find(params[:id])
+      include = index_params[:include]
+      @manifest = Manifest.includes(include).find(params[:id])
       ActiveRecord::Base.transaction do
         @manifest.update!(update_params[:attrs])
       end
@@ -41,7 +45,26 @@ module V1
       head :no_content, status: :ok
     end
 
+    def download_manifest
+      index_params = manifest_params.index
+      include = index_params[:include]
+      manifest = Manifest.includes(include).find(params[:id])
+      pdf_html = ActionController::Base.new.render_to_string(
+        template: 'manifests/manifest.html.erb',
+        layout: 'pdf',
+        formats: :html,
+        encoding: 'UTF-8',
+        locals: { manifest: manifest }
+      )
+      pdf = WickedPdf.new.pdf_from_string(pdf_html, { orientation: 'Landscape' })
+      send_data pdf, filename: 'manifest.pdf', disposition: 'attachment', type: 'application/pdf'
+    end
+
     private
+
+    def get_html
+      ActionController::Base
+    end
 
     def manifest_params
       @manifest_params ||= V1::ManifestParams.new(params)

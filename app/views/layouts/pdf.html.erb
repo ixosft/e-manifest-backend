@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <%= stylesheet_link_tag :pdf, "https://res.cloudinary.com/ixosft/raw/upload/v1619345900/css/pdf_itpizb.css" %>
+  <%= stylesheet_link_tag :pdf, "https://res.cloudinary.com/ixosft/raw/upload/v1619345900/css/custom_ftve6p.css" %>
+</head>
+
+<body onload='number_pages' class="pace-done sidebar-pinned">
+  <div id="content">
+    <%= yield %>
+  </div>
+</body>
+
+</html>

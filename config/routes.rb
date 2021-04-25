@@ -21,7 +21,9 @@ Rails.application.routes.draw do
       get :validate_plate_number, on: :collection
     end
     resources :people
-    resources :manifests
+    resources :manifests do
+      get :download_manifest, on: :member
+    end
     resources :terminals
     resources :companies
     resources :manifest_people

@@ -21,6 +21,9 @@ gem 'paging_cursor'
 gem 'rails_same_site_cookie'
 gem 'simple_command'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'jsonapi-serializer'

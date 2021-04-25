@@ -1,0 +1,162 @@
+/* Common */
+
+.flex-display {
+  display: flex;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.unset-list-bullet-style {
+  list-style-type: none;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+/* Header */
+.account-dropdown {
+  position: absolute;
+  will-change: transform;
+  top: 0px;
+  left: 0px;
+  transform: translate3d(-78px, 56px, 0px);
+}
+
+/* Login */
+.login-alert {
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+
+/* infinite scroll */
+.infinite-scroll-component__outerdiv {
+  width: 100% !important;
+}
+
+
+
+/* Modal */
+.show-modal {
+  display: block;
+  background: #0d1c2fa3
+}
+
+.modal-body {
+  background-color: #fff;
+}
+
+.bg-dark .modal-body {
+  background-color: #12263f !important;
+}
+
+.modal-footer {
+  background-color: #fff;
+}
+
+.modal {
+  z-index: 6000;
+}
+
+
+#slideRightModal {
+  z-index: 4000;
+}
+
+/* Forms */
+.form-select {
+  height: unset;
+  padding: unset;
+  border: unset;
+}
+
+
+/* DropwDowns */
+
+.btn-drowpdown-wrapper {
+  position: absolute;
+  will-change: transform;
+  top: 0px;
+  left: 0px;
+  transform: translate3d(136px, 36px, 0px);
+}
+
+/* table */
+.search-input-wrapper {
+  width: 100%;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  display: flex;
+}
+
+.search-input {
+  width: 200px;
+  height: 36px;
+}
+
+.searable-wrapper {
+  width: 200px;
+  margin-right: 5px;
+  z-index: 1000;
+  margin-left: 5px;
+}
+
+#scrollableDiv {
+  overflow-y: auto;
+  width: 100%;
+  height: 70vh;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+#scrollableDiv::-webkit-scrollbar {
+  display: none;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #12263f;
+  z-index: 200;
+}
+
+table ul {
+  padding: 0;
+}
+
+/* Side bar */
+
+.admin-sidebar {
+  z-index: 2000;
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* For mobile phones: */
+  .search-input {
+    width: 100%;
+  }
+
+  .search-input-wrapper {
+    flex-direction: column;
+  }
+
+  .searable-wrapper {
+    width: 100%;
+    margin: 0;
+    overflow: visible;
+    position: relative;
+  }
+}

@@ -1,0 +1,74 @@
+<main class="admin-main no-padding">
+  <section class="admin-content">
+    <div class="bg-dark m-b-30">
+      <div class="container">
+        <div class="row p-b-60 p-t-60">
+          <div class="col-md-6 text-white p-b-30">
+            <div class="media">
+              <div class="media-body">
+                <h1>#0000<%= manifest.id %> </h1>
+                <h5>Number Plate: <%= manifest.motor.number_plate %></h5>
+                <h5>Terminal: <%= manifest&.terminal&.name || "" %></h5>
+                <h5>Company name: <%= manifest&.company&.name || "" %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pull-up">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row m-b-20">
+                  <div class="col-md-6 my-auto">
+                    <h4 class="m-0">Manifest</h4>
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-12 p-0">
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="">
+                          <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Destination State</th>
+                            <th scope="col">Destination LGT</th>
+                            <th scope="col">Next of name</th>
+                            <th scope="col">Next of number</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% manifest.manifest_people.each do |manifest_person| %>
+                          <tr>
+                            <td className="align-middle"><%= manifest_person.person.person_type  %></td>
+                            <td className="align-middle">
+                              <%= (manifest_person.person.full_name.presence || "").capitalize  %></td>
+                            <td className="align-middle"><%= manifest_person.person.number  %></td>
+                            <td className="align-middle">
+                              <%= (manifest_person.destination_state.presence || "").capitalize  %></td>
+                            <td className="align-middle">
+                              <%= (manifest_person.destination_local_goverment.presence || "").capitalize  %></td>
+                            <td className="align-middle">
+                              <%= (manifest_person.person.next_of_kin_name.presence || "").capitalize  %></td>
+                            <td className="align-middle">
+                              <%= (manifest_person.person.next_of_kin_number.presence || "").capitalize  %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
