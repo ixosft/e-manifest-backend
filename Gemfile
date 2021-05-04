@@ -18,6 +18,7 @@ gem 'bcrypt'
 gem 'discard'
 gem 'jwt'
 gem 'paging_cursor'
+gem 'pundit'
 gem 'rails_same_site_cookie'
 gem 'simple_command'
 

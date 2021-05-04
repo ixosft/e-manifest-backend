@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[login logout register]
+  skip_before_action :authenticate_request, only: %i[login logout]
   # TODO: admin only route
   def register
     raise ExceptionHandler::AuthenticationError if params[:role].to_s == '4' # can't create user with super admin role
 
+    authorize User.new, policy_class: UserPolicy
     @user = User.create(user_params.create[:attrs])
     if @user.save!
       render json: register_response, status: :created

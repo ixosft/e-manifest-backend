@@ -39,7 +39,12 @@ module V1
     end
 
     def auth
-      DEFAULT
+      {
+        include: %I[],
+        fields: {
+          user: %I[id name email username role number permission_graph]
+        }
+      }
     end
   end
 end
