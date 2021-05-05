@@ -5,11 +5,11 @@ module V1
       include: %I[company motor terminal manifest_people manifest_people.person],
       fields: {
         company: %i[id name],
-        motor: %i[id chasis_number number_plate brand],
         person: V1::PersonSerializer::ATTRIBUTES,
-        terminal: %i[name id state local_goverment],
-        manifest_person: %i[id person_id manifest_id destination_state destination_local_goverment],
-        manifest: V1::ManifestSerializer::ATTRIBUTES
+        terminal: %i[name id state terminal],
+        manifest: V1::ManifestSerializer::ATTRIBUTES,
+        motor: %i[id number_plate brand],
+        manifest_person: V1::ManifestPersonSerializer::ATTRIBUTES
       }
     }.freeze
 

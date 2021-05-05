@@ -6,8 +6,8 @@ module V1
       fields: {
         company: %i[id name],
         person: V1::PersonSerializer::ATTRIBUTES,
-        terminal: %i[name id state local_goverment],
-        motor: %i[id chasis_number number_plate brand],
+        terminal: %i[name id state terminal],
+        motor: %i[id number_plate brand],
         manifest: %i[id motor_id terminal_id],
         manifest_person: V1::ManifestPersonSerializer::ATTRIBUTES
       }

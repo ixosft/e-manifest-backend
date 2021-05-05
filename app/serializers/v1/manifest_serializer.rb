@@ -1,7 +1,7 @@
 module V1
   class ManifestSerializer
     include JSONAPI::Serializer
-    ATTRIBUTES = %i[id destination_state source_state company_id terminal_id motor_id].freeze
+    ATTRIBUTES = %i[id destination_state source_state company_id terminal_id motor_id source_terminal destination_terminal departure_time].freeze
     attributes(*ATTRIBUTES)
 
     belongs_to :motor

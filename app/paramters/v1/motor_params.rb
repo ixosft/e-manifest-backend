@@ -42,7 +42,7 @@ module V1
     private
 
     def motor_params
-      @motor_params ||= params.permit(:model, :color, :chasis_number, :number_plate, :year, :brand, :person_id)
+      @motor_params ||= params.permit(:color, :motor_type, :seat_number, :number_plate, :brand, :person_id)
     end
   end
 end

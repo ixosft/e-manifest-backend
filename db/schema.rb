@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_06_140935) do
+ActiveRecord::Schema.define(version: 2021_05_04_075810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,18 +29,24 @@ ActiveRecord::Schema.define(version: 2021_04_06_140935) do
 
   create_table "manifest_people", force: :cascade do |t|
     t.string "destination_state"
-    t.string "destination_local_goverment"
+    t.string "destination_terminal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "person_id"
     t.bigint "manifest_id"
-    t.index ["destination_local_goverment"], name: "index_manifest_people_on_destination_local_goverment"
-    t.index ["destination_state", "destination_local_goverment"], name: "index_manifest_people_on_destination_and_lgt"
+    t.string "source_state"
+    t.string "source_terminal"
     t.index ["destination_state"], name: "index_manifest_people_on_destination_state"
+    t.index ["destination_terminal"], name: "index_manifest_people_on_destination_terminal"
     t.index ["manifest_id"], name: "index_manifest_people_on_manifest_id"
     t.index ["person_id", "destination_state"], name: "index_manifest_people_on_person_and_destination"
     t.index ["person_id", "manifest_id"], name: "index_manifest_people_on_person_id_and_manifest_id"
     t.index ["person_id"], name: "index_manifest_people_on_person_id"
+    t.index ["source_state", "destination_state"], name: "index_manifest_people_source_destination"
+    t.index ["source_state", "source_terminal", "destination_state", "destination_terminal"], name: "index_manifest_people_src_dest_state_terminal"
+    t.index ["source_state"], name: "index_manifest_people_on_source_state"
+    t.index ["source_terminal", "destination_terminal"], name: "index_manifest_people_source_destination_terminal"
+    t.index ["source_terminal"], name: "index_manifest_people_on_source_terminal"
   end
 
   create_table "manifests", force: :cascade do |t|
@@ -52,34 +58,43 @@ ActiveRecord::Schema.define(version: 2021_04_06_140935) do
     t.bigint "company_id"
     t.bigint "terminal_id"
     t.datetime "deleted_at"
+    t.string "source_terminal"
+    t.string "destination_terminal"
+    t.time "departure_time"
     t.index ["company_id", "motor_id"], name: "index_manifests_on_company_id_and_motor_id"
     t.index ["company_id", "terminal_id", "motor_id"], name: "index_manifests_on_company_id_and_terminal_id_and_motor_id"
     t.index ["company_id", "terminal_id"], name: "index_manifests_on_company_id_and_terminal_id"
     t.index ["company_id"], name: "index_manifests_on_company_id"
     t.index ["deleted_at"], name: "index_manifests_on_deleted_at"
+    t.index ["departure_time", "source_terminal", "destination_terminal", "destination_state"], name: "index_manifests_d_time_source_destination_state_terminal"
+    t.index ["departure_time"], name: "index_manifests_on_departure_time"
+    t.index ["destination_state", "destination_terminal"], name: "index_manifests_on_destination_state_and_destination_terminal"
     t.index ["destination_state"], name: "index_manifests_on_destination_state"
+    t.index ["destination_terminal"], name: "index_manifests_on_destination_terminal"
     t.index ["motor_id"], name: "index_manifests_on_motor_id"
     t.index ["source_state", "destination_state"], name: "index_manifests_on_source_state_and_destination_state"
+    t.index ["source_state", "source_terminal"], name: "index_manifests_on_source_state_and_source_terminal"
     t.index ["source_state"], name: "index_manifests_on_source_state"
+    t.index ["source_terminal", "destination_terminal", "destination_state"], name: "index_manifests_source_destination_state_terminal"
+    t.index ["source_terminal", "destination_terminal"], name: "index_manifests_on_source_terminal_and_destination_terminal"
+    t.index ["source_terminal"], name: "index_manifests_on_source_terminal"
     t.index ["terminal_id"], name: "index_manifests_on_terminal_id"
   end
 
   create_table "motors", force: :cascade do |t|
-    t.string "model"
     t.integer "brand"
     t.string "color"
-    t.integer "year"
-    t.string "chasis_number"
     t.string "number_plate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "person_id"
     t.datetime "deleted_at"
-    t.index ["brand", "model"], name: "index_motors_on_brand_and_model"
+    t.integer "seat_number"
+    t.string "motor_type"
     t.index ["brand"], name: "index_motors_on_brand"
-    t.index ["chasis_number"], name: "index_motors_on_chasis_number"
     t.index ["deleted_at"], name: "index_motors_on_deleted_at"
-    t.index ["model"], name: "index_motors_on_model"
+    t.index ["motor_type"], name: "index_motors_on_motor_type"
+    t.index ["number_plate"], name: "index_motors_on_number_plate"
     t.index ["person_id", "brand"], name: "index_motors_on_person_id_and_brand"
     t.index ["person_id"], name: "index_motors_on_person_id"
   end
@@ -95,29 +110,34 @@ ActiveRecord::Schema.define(version: 2021_04_06_140935) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
+    t.string "nim"
+    t.integer "sex"
     t.index ["deleted_at"], name: "index_people_on_deleted_at"
+    t.index ["full_name", "number"], name: "index_people_on_full_name_and_number"
     t.index ["full_name"], name: "index_people_on_full_name"
     t.index ["number"], name: "index_people_on_number"
     t.index ["person_type", "full_name"], name: "index_people_on_person_type_and_full_name"
     t.index ["person_type", "number", "full_name"], name: "index_people_on_person_type_and_number_and_full_name"
     t.index ["person_type", "number"], name: "index_people_on_person_type_and_number"
     t.index ["person_type"], name: "index_people_on_person_type"
+    t.index ["sex", "full_name", "number"], name: "index_people_on_sex_and_full_name_and_number"
+    t.index ["sex"], name: "index_people_on_sex"
   end
 
   create_table "terminals", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "state"
-    t.string "local_goverment"
+    t.string "terminal"
     t.integer "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_terminals_on_deleted_at"
-    t.index ["local_goverment"], name: "index_terminals_on_local_goverment"
     t.index ["manager_id"], name: "index_terminals_on_manager_id"
-    t.index ["state", "local_goverment"], name: "index_terminals_on_state_and_local_goverment"
+    t.index ["state", "terminal"], name: "index_terminals_on_state_and_terminal"
     t.index ["state"], name: "index_terminals_on_state"
+    t.index ["terminal"], name: "index_terminals_on_terminal"
   end
 
   create_table "users", force: :cascade do |t|

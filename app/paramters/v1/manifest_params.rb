@@ -28,8 +28,9 @@ module V1
 
     def manifest_params
       @manifest_params ||= params.permit(
-        :id, :destination_state, :source_state, :company_id, :terminal_id, :motor_id,
-        manifest_people_attributes: %i[id manifest_id destination_state destination_local_goverment person_id _destroy]
+        :id, :destination_state, :source_state, :company_id, :terminal_id, :motor_id, :source_terminal,
+        :destination_terminal, :departure_time,
+        manifest_people_attributes: %i[id manifest_id source_state source_terminal destination_state destination_terminal person_id _destroy]
       )
     end
   end

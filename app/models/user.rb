@@ -27,8 +27,3 @@ class User < ApplicationRecord
     end
   end
 end
-
-
-saved_list = Product.objects.filter(saved_items__user_account=request.user)
-
-https://docs.google.com/forms/d/e/1FAIpQLSfUCSyObKZDjjtAhIgc8r5FrA4VSUflq1dMK6QyYMv33LeEDQ/viewform?c=0&w=1&emailAddress=omedale@gmail.com&entry.838873576=Oluwafemi%20Medale&entry.1191000917=undefined&entry.1269347964=abdullah.rafique01@gmail.com&entry.1846957123=Abdullah%20Rafique&entry.478142644_sentinel=Interactive%20Front%20End%20Development&entry.775489883=00:00:00&entry.2010663110=Average%20-%20The%20student%20is%20moving%20at%20an%20acceptable%20pace.&entry.1882714143=&entry.401267824=&emailReceipt=true
