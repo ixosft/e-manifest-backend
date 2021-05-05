@@ -6,10 +6,15 @@
           <div class="col-md-6 text-white p-b-30">
             <div class="media">
               <div class="media-body">
-                <h1>#0000<%= manifest.id %> </h1>
+                <h1 className="text-center">#0000<%= manifest.id %> </h1>
                 <h5>Number Plate: <%= manifest.motor.number_plate %></h5>
-                <h5>Terminal: <%= manifest&.terminal&.name || "" %></h5>
+                <h5>Source Terminal: <%= manifest.source_terminal %></h5>
+                <h5>
+                  Destination Terminal: <%= manifest.destination_terminal %>
+                </h5>
                 <h5>Company name: <%= manifest&.company&.name || "" %></h5>
+                <h5>Driver name: <%= (driver.full_name || "").capitalize %></h5>
+                <h5>Driver Number: <%= driver.number || "" %></h5>
               </div>
             </div>
           </div>
@@ -33,30 +38,26 @@
                       <table class="table table-hover">
                         <thead class="">
                           <tr>
+                            <th scope="col">S/N</th>
                             <th scope="col">Type</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone Number</th>
-                            <th scope="col">Destination State</th>
-                            <th scope="col">Destination LGT</th>
-                            <th scope="col">Next of name</th>
-                            <th scope="col">Next of number</th>
+                            <th scope="col">Source Terminal</th>
+                            <th scope="col">Destination Terminal</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <% manifest.manifest_people.each do |manifest_person| %>
+                          <% manifest.manifest_people.each_with_index do |manifest_person, index| %>
                           <tr>
+                           <td className="align-middle"><%= (index + 1)  %></td>
                             <td className="align-middle"><%= manifest_person.person.person_type  %></td>
                             <td className="align-middle">
                               <%= (manifest_person.person.full_name.presence || "").capitalize  %></td>
                             <td className="align-middle"><%= manifest_person.person.number  %></td>
                             <td className="align-middle">
-                              <%= (manifest_person.destination_state.presence || "").capitalize  %></td>
+                              <%= (manifest_person.source_terminal.presence || "").capitalize  %></td>
                             <td className="align-middle">
-                              <%= (manifest_person.destination_local_goverment.presence || "").capitalize  %></td>
-                            <td className="align-middle">
-                              <%= (manifest_person.person.next_of_kin_name.presence || "").capitalize  %></td>
-                            <td className="align-middle">
-                              <%= (manifest_person.person.next_of_kin_number.presence || "").capitalize  %></td>
+                              <%= (manifest_person.destination_terminal.presence || "").capitalize  %></td>
                           </tr>
                           <% end %>
                         </tbody>

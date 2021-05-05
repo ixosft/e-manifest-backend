@@ -49,12 +49,13 @@ module V1
       index_params = manifest_params.index
       include = index_params[:include]
       manifest = Manifest.includes(include).find(params[:id])
+      driver = Manifest.first.manifest_people.find { |mp| mp.person.person_type == 'driver' }&.person
       pdf_html = ActionController::Base.new.render_to_string(
         template: 'manifests/manifest.html.erb',
         layout: 'pdf',
         formats: :html,
         encoding: 'UTF-8',
-        locals: { manifest: manifest }
+        locals: { driver: driver, manifest: manifest }
       )
       pdf = WickedPdf.new.pdf_from_string(pdf_html, { orientation: 'Landscape' })
       send_data pdf, filename: 'manifest.pdf', disposition: 'attachment', type: 'application/pdf'
