@@ -41,7 +41,7 @@ module V1
     end
 
     def destroy
-      Manifest.find(params[:id]).discard
+      Manifest.find(params[:id]).destroy
       head :no_content, status: :ok
     end
 
