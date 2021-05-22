@@ -86,7 +86,7 @@ module V1
                       values << query_data[:value]
                       " #{current_column_table}.#{col} ILIKE ('%' || ? || '%')  "
                     end
-            all_columns_string = " #{j.positive? ? ' OR ' : ' '}  #{query} "
+            all_columns_string += " #{j.positive? ? ' OR ' : ' '}  #{query} "
           end
           column_string += " #{i.positive? ? ' AND ' : ' '}  ( #{all_columns_string} )  "
         end
