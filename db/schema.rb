@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_04_075810) do
+ActiveRecord::Schema.define(version: 2021_06_14_113535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,24 +29,28 @@ ActiveRecord::Schema.define(version: 2021_05_04_075810) do
 
   create_table "manifest_people", force: :cascade do |t|
     t.string "destination_state"
-    t.string "destination_terminal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "person_id"
     t.bigint "manifest_id"
     t.string "source_state"
-    t.string "source_terminal"
+    t.money "amount", scale: 2
+    t.string "ticket_uid"
+    t.integer "source_terminal_id"
+    t.integer "destination_terminal_id"
     t.index ["destination_state"], name: "index_manifest_people_on_destination_state"
-    t.index ["destination_terminal"], name: "index_manifest_people_on_destination_terminal"
+    t.index ["destination_terminal_id", "source_terminal_id"], name: "index_manifest_people_dest_source_terminal"
+    t.index ["destination_terminal_id"], name: "index_manifest_people_on_destination_terminal_id"
     t.index ["manifest_id"], name: "index_manifest_people_on_manifest_id"
     t.index ["person_id", "destination_state"], name: "index_manifest_people_on_person_and_destination"
     t.index ["person_id", "manifest_id"], name: "index_manifest_people_on_person_id_and_manifest_id"
     t.index ["person_id"], name: "index_manifest_people_on_person_id"
+    t.index ["source_state", "destination_state", "source_terminal_id", "destination_terminal_id"], name: "index_manifest_people_src_dest_state_terminal"
     t.index ["source_state", "destination_state"], name: "index_manifest_people_source_destination"
-    t.index ["source_state", "source_terminal", "destination_state", "destination_terminal"], name: "index_manifest_people_src_dest_state_terminal"
     t.index ["source_state"], name: "index_manifest_people_on_source_state"
-    t.index ["source_terminal", "destination_terminal"], name: "index_manifest_people_source_destination_terminal"
-    t.index ["source_terminal"], name: "index_manifest_people_on_source_terminal"
+    t.index ["source_terminal_id", "destination_terminal_id"], name: "index_manifest_people_source_destination_terminal"
+    t.index ["source_terminal_id"], name: "index_manifest_people_on_source_terminal_id"
+    t.index ["ticket_uid"], name: "index_manifest_people_on_ticket_uid"
   end
 
   create_table "manifests", force: :cascade do |t|
@@ -58,26 +62,26 @@ ActiveRecord::Schema.define(version: 2021_05_04_075810) do
     t.bigint "company_id"
     t.bigint "terminal_id"
     t.datetime "deleted_at"
-    t.string "source_terminal"
-    t.string "destination_terminal"
     t.time "departure_time"
+    t.boolean "closed", default: false
+    t.integer "source_terminal_id"
+    t.integer "destination_terminal_id"
+    t.index ["closed"], name: "index_manifests_on_closed"
     t.index ["company_id", "motor_id"], name: "index_manifests_on_company_id_and_motor_id"
     t.index ["company_id", "terminal_id", "motor_id"], name: "index_manifests_on_company_id_and_terminal_id_and_motor_id"
     t.index ["company_id", "terminal_id"], name: "index_manifests_on_company_id_and_terminal_id"
     t.index ["company_id"], name: "index_manifests_on_company_id"
     t.index ["deleted_at"], name: "index_manifests_on_deleted_at"
-    t.index ["departure_time", "source_terminal", "destination_terminal", "destination_state"], name: "index_manifests_d_time_source_destination_state_terminal"
     t.index ["departure_time"], name: "index_manifests_on_departure_time"
-    t.index ["destination_state", "destination_terminal"], name: "index_manifests_on_destination_state_and_destination_terminal"
     t.index ["destination_state"], name: "index_manifests_on_destination_state"
-    t.index ["destination_terminal"], name: "index_manifests_on_destination_terminal"
+    t.index ["destination_terminal_id", "source_terminal_id"], name: "index_manifest_dest_source_terminal_id"
+    t.index ["destination_terminal_id"], name: "index_manifests_on_destination_terminal_id"
     t.index ["motor_id"], name: "index_manifests_on_motor_id"
+    t.index ["source_state", "destination_state", "source_terminal_id", "destination_terminal_id"], name: "index_manifests_source_destination_state_terminal"
     t.index ["source_state", "destination_state"], name: "index_manifests_on_source_state_and_destination_state"
-    t.index ["source_state", "source_terminal"], name: "index_manifests_on_source_state_and_source_terminal"
     t.index ["source_state"], name: "index_manifests_on_source_state"
-    t.index ["source_terminal", "destination_terminal", "destination_state"], name: "index_manifests_source_destination_state_terminal"
-    t.index ["source_terminal", "destination_terminal"], name: "index_manifests_on_source_terminal_and_destination_terminal"
-    t.index ["source_terminal"], name: "index_manifests_on_source_terminal"
+    t.index ["source_terminal_id", "destination_terminal_id"], name: "index_manifest_source_dest_terminal_id"
+    t.index ["source_terminal_id"], name: "index_manifests_on_source_terminal_id"
     t.index ["terminal_id"], name: "index_manifests_on_terminal_id"
   end
 

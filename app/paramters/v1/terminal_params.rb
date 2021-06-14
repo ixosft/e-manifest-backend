@@ -18,6 +18,12 @@ module V1
       else
         include << :manager
       end
+
+      if params[:state]
+        columns += " #{columns.present? ? ' AND ' : ''} terminals.state = ? "
+        values += [params[:state]]
+      end
+
       filter_values, filter, filter_joins = ::V1::FilterService.new(Terminal, params).build_query_params
       filter = filter.strip.present? ? [filter, *filter_values] : []
       query =  columns.present? ? [columns, *values] : []

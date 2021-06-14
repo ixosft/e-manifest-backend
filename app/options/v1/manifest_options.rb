@@ -2,7 +2,7 @@ module V1
   class ManifestOptions
     attr_reader :params
     DEFAULT = {
-      include: %I[company motor terminal manifest_people manifest_people.person],
+      include: %I[company motor source_terminal destination_terminal manifest_people manifest_people.person],
       fields: {
         company: %i[id name],
         person: V1::PersonSerializer::ATTRIBUTES,

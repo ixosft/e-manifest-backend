@@ -8,7 +8,7 @@ module V1
 
     def index
       values = []
-      include = []
+      include = [:owner]
       columns = ''
       if params[:query].present? && params[:query].strip.presence
         columns += " #{columns.present? ? ' AND ' : ' '} motors.number_plate ILIKE ('%' || ? || '%') "

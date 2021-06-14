@@ -13,8 +13,8 @@
                   Destination Terminal: <%= manifest.destination_terminal %>
                 </h5>
                 <h5>Company name: <%= manifest&.company&.name || "" %></h5>
-                <h5>Driver name: <%= (driver.full_name || "").capitalize %></h5>
-                <h5>Driver Number: <%= driver.number || "" %></h5>
+                <h5>Driver name: <%= (driver&.full_name || "").capitalize %></h5>
+                <h5>Driver Number: <%= driver&.number || "" %></h5>
               </div>
             </div>
           </div>

@@ -2,9 +2,9 @@ module V1
   class MotorOptions
     attr_reader :params
     DEFAULT = {
-      include: %I[onwer],
+      include: %I[owner],
       fields: {
-        onwer: %i[id full_name],
+        person: %i[id full_name],
         motor: V1::MotorSerializer::ATTRIBUTES
       }
     }.freeze

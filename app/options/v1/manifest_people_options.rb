@@ -2,7 +2,7 @@ module V1
   class ManifestPeopleOptions
     attr_reader :params
     DEFAULT = {
-      include: %I[person manifest manifest.terminal manifest.company manifest.motor],
+      include: %I[person manifest source_terminal destination_terminal manifest.source_terminal manifest.destination_terminal manifest.company manifest.motor],
       fields: {
         company: %i[id name],
         person: V1::PersonSerializer::ATTRIBUTES,
@@ -19,6 +19,14 @@ module V1
 
     def index(manifest_people)
       DEFAULT.merge({ meta: { cursor: manifest_people.cursor_before } })
+    end
+
+    def create_ticket
+      DEFAULT
+    end
+
+    def update_ticket
+      DEFAULT
     end
   end
 end

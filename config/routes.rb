@@ -27,5 +27,9 @@ Rails.application.routes.draw do
     resources :terminals
     resources :companies
     resources :manifest_people
+    resources :tickets, only: %i[] do
+      post :create_ticket, on: :collection
+      put :update_ticket, on: :collection
+    end
   end
 end

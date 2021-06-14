@@ -10,10 +10,15 @@ module V1
       values = []
       include = []
       columns = ''
-      
+
       if params[:type] == 'for_driver_dropdown'
         columns += ' people.person_type = ? '
         values << Person.person_types[:driver]
+      end
+
+      if params[:type] == 'for_passenger_dropdown'
+        columns += ' people.person_type = ? '
+        values << Person.person_types[:passenger]
       end
 
       if params[:ids].present? && params[:ids].size.positive?

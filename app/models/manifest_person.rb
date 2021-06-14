@@ -9,4 +9,10 @@ class ManifestPerson < ApplicationRecord
 
   belongs_to :person
   belongs_to :manifest
+  belongs_to :destination_terminal, class_name: 'Terminal', foreign_key: 'destination_terminal_id'
+  belongs_to :source_terminal, class_name: 'Terminal', foreign_key: 'source_terminal_id'
+
+  before_create do
+    self.ticket_uid = "#{Time.now.to_i}#{rand(1..100)}"
+  end
 end
