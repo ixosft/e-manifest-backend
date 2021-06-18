@@ -31,7 +31,7 @@ module V1
     end
 
     def destroy
-      Terminal.find(params[:id]).discard
+      # Terminal.find(params[:id]).discard
       head :no_content, status: :ok
     end
 

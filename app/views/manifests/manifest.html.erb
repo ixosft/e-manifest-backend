@@ -8,9 +8,9 @@
               <div class="media-body">
                 <h1 className="text-center">#0000<%= manifest.id %> </h1>
                 <h5>Number Plate: <%= manifest.motor.number_plate %></h5>
-                <h5>Source Terminal: <%= manifest.source_terminal %></h5>
+                <h5>Source Terminal: <%= manifest.source_terminal.name %></h5>
                 <h5>
-                  Destination Terminal: <%= manifest.destination_terminal %>
+                  Destination Terminal: <%= manifest.destination_terminal.name %>
                 </h5>
                 <h5>Company name: <%= manifest&.company&.name || "" %></h5>
                 <h5>Driver name: <%= (driver&.full_name || "").capitalize %></h5>
@@ -55,9 +55,9 @@
                               <%= (manifest_person.person.full_name.presence || "").capitalize  %></td>
                             <td className="align-middle"><%= manifest_person.person.number  %></td>
                             <td className="align-middle">
-                              <%= (manifest_person.source_terminal.presence || "").capitalize  %></td>
+                              <%= (manifest_person.source_terminal.name.presence || "").capitalize  %></td>
                             <td className="align-middle">
-                              <%= (manifest_person.destination_terminal.presence || "").capitalize  %></td>
+                              <%= (manifest_person.destination_terminal.name.presence || "").capitalize  %></td>
                           </tr>
                           <% end %>
                         </tbody>
