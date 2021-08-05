@@ -10,20 +10,12 @@ User.find_or_create_by(username: 'omedale') do |user|
   user.name = 'Test Admin'
   user.role = 4
   user.password = 'Password1'
-  user.email = 'omedale@gmail.com'
+  user.email = 'admin@gmail.com'
 end
 
 User.find_or_create_by(username: 'agent') do |user|
   user.name = 'Test agent'
   user.role = 1
   user.password = 'Password1'
-  user.email = 'agent@gmail.com'
+  user.email = 'test@gmail.com'
 end
-
-# User.create(
-#   name: 'Test Admin',
-#   role: 1,
-#   username: 'agent',
-#   password: 'Password1',
-#   email: 'omedale@gmail.com'
-# )

@@ -56,6 +56,7 @@ module V1
       end
     end
 
+    # TODO: clean up
     def build_search_query
       search_params = [[], '']
       if search.keys.size.positive?
@@ -97,4 +98,3 @@ module V1
     end
   end
 end
-# Manifest.joins('JOIN motors on motors.id = manifests.motor_id JOIN terminals on terminals.id = manifests.terminal_id')

@@ -16,6 +16,8 @@ module V1
 
       private
 
+      # TODO: clean up
+      # create counters for major resources
       def dashboard_query
         "
           SELECT
