@@ -1,5 +1,6 @@
 class Motor < ApplicationRecord
   include SoftDeletable
+  include Searchable
   validates_presence_of :brand, :number_plate
   validates :number_plate, uniqueness: true
 

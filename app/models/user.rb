@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include SoftDeletable
+  include Searchable
   belongs_to :terminal, optional: true
 
   validates_presence_of :username, :password_digest

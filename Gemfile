@@ -25,6 +25,9 @@ gem 'simple_command'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'jsonapi-serializer'

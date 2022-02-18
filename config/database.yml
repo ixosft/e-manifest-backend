@@ -16,7 +16,8 @@
 #
 default: &default
   timeout: 5000
-  host: db
+  # host: db
+  host: localhost
   password: password
   username: postgres
   adapter: postgresql

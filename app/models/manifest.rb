@@ -1,5 +1,6 @@
 class Manifest < ApplicationRecord
   # include SoftDeletable
+  include Searchable
   belongs_to :motor
   belongs_to :terminal, optional: true
   belongs_to :company,  optional: true
